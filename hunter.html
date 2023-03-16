@@ -18,6 +18,7 @@
   <p id="penalty" style="color: orange;">Penalty is zero.</p>
   <p onclick="help()" style="color: blue;">Click for help. </p>
   <p id="help" style="color: magenta;">Help report.</p>
+  <p><button onclick="bonus()">Bonus</button></p> 
 
 <div class="container">
     <div class="row"> 
@@ -178,6 +179,49 @@ function check(position)
 
         function help()
         {
+            let lastcol=lastCheck%6;
+            let lastrow=Math.floor(lastCheck/6);
+            let catcol=catLocation%6;
+            let catrow=Math.floor(catLocation/6);
+            let coldiff=Math.abs(lastcol-catcol);
+            let rowdiff=(Math.abs(lastrow-catrow));
+            let ratcol=mouseLocation%6;
+            let ratrow=Math.floor(mouseLocation/6);
+            let ratcoldiff=Math.abs(lastcol-ratcol);
+            let ratrowdiff=(Math.abs(lastrow-ratrow));
+            console.log(rowdiff,coldiff)
+            if(ratrowdiff<=1 && ratcoldiff<=1)
+            {
+                document.getElementById("help").innerHTML="squeek"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+            else if(rowdiff<=1 && coldiff<=1)
+            {
+                document.getElementById("help").innerHTML="Meow"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+            else{
+                document.getElementById("help").innerHTML="sorry, no help available"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+        }
+        let sl1,sl2,sl3;
+        function bonus(){
+          sl1=Math.floor(Math.random()*24);
+            
+            console.log(sl1);
+            sl2=Math.floor(Math.random()*24);
+            console.log(sl2);
+            sl3=Math.floor(Math.random()*24);
+            console.log(sl3);
+            lastCheck=sl3;
+            catLocation=sl1;
+            mouseLocation=sl2;
+            bonus=0;
+            penal=0;
             let lastcol=lastCheck%6;
             let lastrow=Math.floor(lastCheck/6);
             let catcol=catLocation%6;
