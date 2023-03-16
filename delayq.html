@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html> <head> 
+    <title>Delay Queue Page</title>
+    <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+
+</style>
+</head>
+<body>
+
+ <h2>builds a delaying queue by Sailaja Lakkakula</h2>  
+ <label for="input">Enter the name of the item here:</label>
+ <input type="text" id="input" ></div> <br>
+
+<div>
+    <div class="flex-container" id="target">
+	 <div class="delayQ">row item 1</div>   
+	 <div class="delayQ">row item 2</div>  
+	 <div class="delayQ">row item 3</div>  
+</div>
+
+<button  onclick="makeNewDiv()">Add value</button>
+<button  onclick="get()">Get</button>
+<button  onclick="delay()">Delay</button>
+<button  onclick="Promote()">Promote</button>
+
+<script>
+     
+    let queueItems=[];
+    let removedItem;
+
+	function makeNewDiv()
+    {
+		let element = document.createElement("div");
+		element.innerHTML = document.getElementById('input').value;
+		element.style.color = "red";
+        element.classList.add("delayQ");
+		let container = document.getElementById('target');
+		container.appendChild(element);
+    }
+    function get()
+    {
+        queueItems=document.getElementsByClassName('delayQ');
+        let len=queueItems.length;
+        if(len>0)
+        {
+            queueItems[0].remove();
+        }
+    }
+    function delay()
+    {
+        queueItems=document.getElementsByClassName('delayQ');
+        let len=queueItems.length;
+        console.log(queueItems);
+        if(len==0 || len==1)
+        {
+            confirm.log("Not enough elements to delay")
+        }
+        else if(len>=2){
+            console.log("length is: "+len);
+            removedItem=queueItems[0];
+            console.log(removedItem);
+            console.log(removedItem.innerHTML);
+            queueItems[0].remove();
+            let container = document.getElementById('target')
+	        container.append(removedItem,container.firstChild)
+        }  
+    }
+      
+</script>
+</body>
+</html>
